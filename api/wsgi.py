@@ -1,8 +1,19 @@
 from correct_spelling import app as spelling_app
 from correct_grammar import app as grammar_app
 
-# This is the main WSGI entry point
-# You can choose which app to run based on a condition or deploy separately
-app = spelling_app  # or grammar_app, depending on the endpoint
+# Choose which app to run based on the request
+def application(environ, start_response):
+    path = environ["PATH_INFO"]
+    if path == "/api/correct_spelling":
+        app = spelling_app
+    elif path == "/api/correct_grammar":
+        app = grammar_app
+    else:
+        # Handle 404
+        def not_found(start_response):
+            start_response("404 Not Found", [("Content-Type", "text/plain")])
+            return [b"404 Not Found"]
 
-# To dynamically switch based on request, you might need a more complex routing logic
+        return not_found(start_response)
+
+    return app(environ, start_response)

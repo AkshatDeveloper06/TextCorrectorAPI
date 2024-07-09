@@ -1,11 +1,12 @@
 {
-    "version": 2,
-    "builds": [
-      { "src": "api/*.py", "use": "@vercel/python" }
-    ],
-    "routes": [
-      { "src": "/api/correct_spelling", "dest": "/api/correct_spelling.py" },
-      { "src": "/api/correct_grammar", "dest": "/api/correct_grammar.py" }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    { "src": "api/correct_spelling.py", "use": "@vercel/python" },
+    { "src": "api/correct_grammar.py", "use": "@vercel/python" },
+    { "src": "api/wsgi.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/api/correct_spelling", "dest": "/api/wsgi.py" },
+    { "src": "/api/correct_grammar", "dest": "/api/wsgi.py" }
+  ]
+}

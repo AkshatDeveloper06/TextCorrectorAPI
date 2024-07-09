@@ -1,3 +1,4 @@
 Flask
 textblob
 language_tool_python
+gunicorn

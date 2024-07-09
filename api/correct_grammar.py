@@ -11,14 +11,13 @@ def correct_grammar(text):
 
 @app.route('/api/correct_grammar', methods=['POST'])
 def correct():
-    data = request.json
+    data = request.get_json()
     if data is None or 'text' not in data:
         return jsonify({'error': 'Invalid input'}), 400
-    
+
     text = data.get('text', '')
     corrected_text = correct_grammar(text)
     return jsonify({'corrected_text': corrected_text})
 
-if __name__ != "__main__":
-    # This makes the app run on Vercel
+if __name__ == "__main__":
     app.run()

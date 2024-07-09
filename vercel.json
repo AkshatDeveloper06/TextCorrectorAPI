@@ -1,0 +1,11 @@
+{
+    "version": 1,
+    "builds": [
+      { "src": "api/*.py", "use": "@vercel/python" }
+    ],
+    "routes": [
+      { "src": "/api/correct_spelling", "dest": "/api/correct_spelling.py" },
+      { "src": "/api/correct_grammar", "dest": "/api/correct_grammar.py" }
+    ]
+  }
+  
